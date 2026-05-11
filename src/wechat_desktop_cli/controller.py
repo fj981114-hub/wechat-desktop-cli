@@ -65,45 +65,8 @@ def press_key(vk_code):
 
 def type_text(text):
     """Type text by putting it on clipboard and pasting (Ctrl+V)."""
-    # Try using ctypes clipboard first
-    try:
-        # Open clipboard
-        if not user32.OpenClipboard(None):
-            print("Warning: Could not open clipboard, trying SendKeys...")
-            _type_via_keys(text)
-            return
-        user32.EmptyClipboard()
-        
-        # Use CF_UNICODETEXT 
-        CF_UNICODETEXT = 13
-        # Create global memory
-        text_utf16 = (text + "\\0").encode("utf-16-le")
-        GMEM_MOVEABLE = 0x0002
-        h_mem = kernel32.GlobalAlloc(GMEM_MOVEABLE, len(text_utf16))
-        if not h_mem:
-            user32.CloseClipboard()
-            print("Warning: GlobalAlloc failed")
-            _type_via_keys(text)
-            return
-        
-        p_mem = kernel32.GlobalLock(h_mem)
-        if not p_mem:
-            kernel32.GlobalFree(h_mem)
-            user32.CloseClipboard()
-            print("Warning: GlobalLock failed")
-            _type_via_keys(text)
-            return
-            
-        ctypes.memmove(p_mem, text_utf16, len(text_utf16))
-        kernel32.GlobalUnlock(h_mem)
-        user32.SetClipboardData(CF_UNICODETEXT, h_mem)
-        user32.CloseClipboard()
-        time.sleep(0.1)
-        key_combination(VK_CONTROL, VK_V)
-        time.sleep(0.2)
-    except Exception as e:
-        print(f"Clipboard failed: {e}, trying SendKeys fallback...")
-        _type_via_keys(text)
+    # Use SendKeys directly - more reliable than clipboard for WeChat
+    _type_via_keys(text)
 
 def _type_via_keys(text):
     """Fallback: type text character by character via key events."""
