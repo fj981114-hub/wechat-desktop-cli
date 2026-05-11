@@ -1,0 +1,2 @@
+[console_scripts]
+wechat = wechat_desktop_cli.cli:main

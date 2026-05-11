@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wechat-desktop-cli"
+version = "1.0.0"
+description = "Control WeChat Desktop via Win32 API — send messages, search contacts, check status"
+requires-python = ">=3.8"
+
+[project.scripts]
+wechat = "wechat_desktop_cli.cli:main"

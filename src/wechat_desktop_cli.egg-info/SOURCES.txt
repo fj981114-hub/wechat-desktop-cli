@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/wechat_desktop_cli/__init__.py
+src/wechat_desktop_cli/__main__.py
+src/wechat_desktop_cli/cli.py
+src/wechat_desktop_cli/controller.py
+src/wechat_desktop_cli.egg-info/PKG-INFO
+src/wechat_desktop_cli.egg-info/SOURCES.txt
+src/wechat_desktop_cli.egg-info/dependency_links.txt
+src/wechat_desktop_cli.egg-info/entry_points.txt
+src/wechat_desktop_cli.egg-info/top_level.txt
